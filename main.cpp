@@ -52,7 +52,7 @@ ffmpgで動画から画像を切り出す
   string jpg = ".jpg" ;
   string num = to_string(i) ;  
   string filename = num + jpg ;
-  string string = "./156/mov/" + filename ; 
+  string string = "./2016_6_10/" + filename ; 
   
   Mat in_img = imread(string) ;
   if(in_img.empty()) return -1;
