@@ -32,7 +32,6 @@ Mat element = Mat::ones(3,3,CV_8UC1); //追加　3×3の行列で要素はすべ
 int Ax, Ay, Bx, By, Cx, Cy, Dx, Dy ;
 int Tr, Tg, Tb ;
 Point2i pre_point ;
-double minimum = 1000 ;
 
 //imwrite("test.jpg", base) ;コンパイルエラーが出る
 
@@ -57,11 +56,11 @@ ffmpgで動画から画像を切り出す
   Mat in_img = imread(string) ;
   if(in_img.empty()) return -1;
 
-  in_img = undist(in_img) ;
+  in_img = undist(in_img) ; //カメラの歪みをとる
 
   double div_x = (double)src_img_cols / in_img.cols ;
   double div_y = (double)src_img_rows / in_img.rows ;
- 
+  //画像をリサイズ(大きすぎるとディスプレイに入りらない)
   resize(in_img, src_img, Size(src_img_cols, src_img_rows), CV_8UC3) ;
 
 
@@ -69,7 +68,7 @@ ffmpgで動画から画像を切り出す
   //------------------座標取得-----------------------------------------------
   namedWindow("getCoordinates") ;
   imshow("getCoordinates", src_img) ;
-  cvSetMouseCallback("getCoordinates", getCoordinates,  NULL) ;
+  cvSetMouseCallback("getCoordinates", getCoordinates,  NULL) ; //田んぼの四隅の座標をとる
   waitKey(0) ;
   destroyAllWindows() ;
 
@@ -174,6 +173,7 @@ ffmpgで動画から画像を切り出す
   
 //(2)しきい値決めうち
 
+  //----------------------二値化-----------------------------------------------
   threshold(image1, binari_2, THRESH, 255, THRESH_BINARY);
   binari_2 = ~binari_2;//ネガポジ
   dilate(binari_2, binari_2, element, Point(-1,-1), 3); //膨張処理3回 最後の引数で回数を設定
@@ -224,7 +224,6 @@ ffmpgで動画から画像を切り出す
   
   }
   fout.close() ;
-  cout << minimum << endl ;
   //fout2.close() ;
 }
 
