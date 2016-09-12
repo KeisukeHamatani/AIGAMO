@@ -14,7 +14,7 @@ static const double R = 1 ;
 static const double G = 1 ;
 static const double B = 0 ;
 
-static const int THRESH = 120 ;
+static const int THRESH = 120 ; //しきい値
 
 using namespace cv;
 using namespace std;
@@ -55,15 +55,14 @@ ffmpgで動画から画像を切り出す
   string string = "./2016_6_10/" + filename ; 
     */
 
-    string string = "IMG_0205.JPG" ; 
+    string string = "./IMG/IMG_0205.JPG" ; 
 
   Mat in_img = imread(string) ;
   if(in_img.empty()) return -1;
 
-  // in_img = undist(in_img) ; //カメラの歪みをとる
+  // in_img = undist(in_img) ; //カメラの歪みをとる(GoPro魚眼)
 
-  double div_x = (double)src_img_cols / in_img.cols ;
-  double div_y = (double)src_img_rows / in_img.rows ;
+
   //画像をリサイズ(大きすぎるとディスプレイに入りらない)
   resize(in_img, src_img, Size(src_img_cols, src_img_rows), CV_8UC3) ;
 
@@ -72,7 +71,7 @@ ffmpgで動画から画像を切り出す
   //------------------座標取得-----------------------------------------------
   namedWindow("getCoordinates") ;
   imshow("getCoordinates", src_img) ;
-  cvSetMouseCallback("getCoordinates", getCoordinates,  NULL) ; //田んぼの四隅の座標をとる
+  cvSetMouseCallback("getCoordinates", getCoordinates,  NULL) ; //田んぼの四隅の座標をとる(クリック)
   waitKey(0) ;
   destroyAllWindows() ;
 
