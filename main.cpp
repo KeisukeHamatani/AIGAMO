@@ -47,16 +47,20 @@ ffmpgで動画から画像を切り出す
   //  Mat in_img = imread("./Picture/78.JPG");
   
 
-  for(int i = 1 ; i <= 212 ; i++){
+  for(int i = 1 ; i <= 1 ; i++){
+    /*
   string jpg = ".jpg" ;
   string num = to_string(i) ;  
   string filename = num + jpg ;
   string string = "./2016_6_10/" + filename ; 
-  
+    */
+
+    string string = "IMG_0205.JPG" ; 
+
   Mat in_img = imread(string) ;
   if(in_img.empty()) return -1;
 
-  in_img = undist(in_img) ; //カメラの歪みをとる
+  // in_img = undist(in_img) ; //カメラの歪みをとる
 
   double div_x = (double)src_img_cols / in_img.cols ;
   double div_y = (double)src_img_rows / in_img.rows ;
