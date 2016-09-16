@@ -33,16 +33,19 @@ int Ax, Ay, Bx, By, Cx, Cy, Dx, Dy ;
 int Tr, Tg, Tb ;
 Point2i pre_point ;
 
-//imwrite("test.jpg", base) ;コンパイルエラーが出る
 
 //ofstream fout2("out2") ;
 
 int main(int argc, char *argv[])
 {
 
-  /*
-ffmpgで動画から画像を切り出す
-   */
+/*
+ffmpgで動画から画像を切り出す方法
+
+ffmpeg -i [ 変換したい動画 ] -r [ 枚数 ] -f image2 %d.jpg
+-r [ 枚数 ] : 1秒あたり何枚抜き出すか
+
+*/
 
   //  Mat in_img = imread("./Picture/78.JPG");
   
@@ -63,7 +66,7 @@ ffmpgで動画から画像を切り出す
   // in_img = undist(in_img) ; //カメラの歪みをとる(GoPro魚眼)
 
 
-  //画像をリサイズ(大きすぎるとディスプレイに入りらない)
+  //画像をリサイズ(大きすぎるとディスプレイに入りらないため)
   resize(in_img, src_img, Size(src_img_cols, src_img_rows), CV_8UC3) ;
 
 
@@ -71,7 +74,7 @@ ffmpgで動画から画像を切り出す
   //------------------座標取得-----------------------------------------------
   namedWindow("getCoordinates") ;
   imshow("getCoordinates", src_img) ;
-  cvSetMouseCallback("getCoordinates", getCoordinates,  NULL) ; //田んぼの四隅の座標をとる(クリック)
+  cvSetMouseCallback("getCoordinates", getCoordinates,  NULL) ; //変換したい四角形の四隅の座標をとる(クリック)
   waitKey(0) ;
   destroyAllWindows() ;
 
