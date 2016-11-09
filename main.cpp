@@ -7,14 +7,16 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv.hpp>
 
-static const int src_img_rows = 800 ;
-static const int src_img_cols = 1000 ;
+static const int src_img_rows = 700 ;
+static const int src_img_cols = 800 ;
 
 static const double R = 1 ; 
-static const double G = 1 ;
+static const double G = 0.5 ;
 static const double B = 0 ;
 
-static const int THRESH = 120 ; //しきい値
+static const int m = 1 ;
+
+static const int THRESH = 40 ; //しきい値
 
 using namespace cv;
 using namespace std;
@@ -50,15 +52,15 @@ ffmpeg -i [ 変換したい動画 ] -r [ 枚数 ] -f image2 %d.jpg
   //  Mat in_img = imread("./Picture/78.JPG");
   
 
-  for(int i = 1 ; i <= 1 ; i++){
-    /*
+  for(int i = 1 ; i <= 212 ; i++){
+    
   string jpg = ".jpg" ;
   string num = to_string(i) ;  
   string filename = num + jpg ;
-  string string = "./2016_6_10/" + filename ; 
-    */
+  string string = "./2016_11_9/" + filename ; 
+    
 
-    string string = "./IMG/IMG_0205.JPG" ; 
+  // string string = "./IMG/IMG_0205.JPG" ; 
 
   Mat in_img = imread(string) ;
   if(in_img.empty()) return -1;
@@ -106,8 +108,8 @@ ffmpeg -i [ 変換したい動画 ] -r [ 枚数 ] -f image2 %d.jpg
 
   //--------------------グレースケール化---------------------------------------
   //(1) cvtcolor利用
-  //cvtColor(dst_img, image1, CV_BGR2GRAY) ;
-
+  cvtColor(dst_img, image1, CV_BGR2GRAY) ;
+  /*
   //(2) RGB値設定 
   int x,y ;
   uchar r1, g1, b1, d ;
@@ -123,7 +125,7 @@ ffmpeg -i [ 変換したい動画 ] -r [ 枚数 ] -f image2 %d.jpg
       image1.at<uchar>(y,x) = d ;
     }
   }
-  
+  */
 
   //２値化
   //------------------しきい値目測用--------------------------------------------
